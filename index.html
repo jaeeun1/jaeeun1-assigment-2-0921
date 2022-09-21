@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{margin: 0; text-align: center;}
+		.cursor{width: 50px; position: absolute; }
+		h1{font-size: 12px; color: #D31521; padding-top: 16px; padding-bottom: 8px;}
+		h2{margin-top: 8px;}
+		#top{height: 0vh;
+			background-color: #F7B42F;
+			}
+		.shiftani{height: 23vh; 
+			background: url(typo.png);
+			background-size: 35vw auto;
+			background-position: 35vw 0;
+			animation: shift 2s infinite linear;
+			background-color: #F7B42F;
+			}
+		@keyframes shift{
+			from{background-position: 0 0;}
+			to{background-position: -35vw 0;}
+		}
+		#m2{transform: rotateY(180deg);}
+		#m4{transform: rotateY(180deg);}
+		#control{margin: auto; padding-top: 5px;}
+
+	</style>
+</head>
+<body>
+	<div id="top">
+			<h1>릴보이(lIlBOI) X 원슈타인(Wonstein) X 미란이(Mirani) - HEAT</h1>
+			<img src = "cover.jpeg" width="100px" id = "title">
+			<h2>
+				<button id="playBut"
+					style=" font-size: 20px; font-weight: bolder; color: #F7B42F; background-color: #D31521; border-style: none; ">
+					play
+				</button>
+				<audio id="HEATsong" src="HEAT.mp3"></audio>
+	</div>
+	<div>
+		<div id="m1" class="shiftani")></div>
+		<div id="m2" class="shiftani")></div>
+		<div id="m3" class="shiftani")></div>
+		<div id="m4" class="shiftani")></div>
+	</div>
+	<input type="range" id=control step="0.1" min="0.2" max="5" value="2">
+
+	<script type="text/javascript">
+		control.oninput = function(){
+			m1.style.animationDuration = control.value + "s";
+			m2.style.animationDuration = control.value + "s";
+			m3.style.animationDuration = control.value + "s";
+			m4.style.animationDuration = control.value + "s";		
+		}
+
+		var state = "off";
+
+		playBut.onclick = function(){
+			if(state == "off"){
+				HEATsong.play();
+				state = "on";}
+			else if(state == "on"){
+				HEATsong.pause();
+				state = "off";
+			}
+		}
+
+		makeFire();
+			function makeFire(){
+				var a = document.createElement("img");
+				a.src = "fire.png";
+				a.className = "cursor"
+				var b = Math.random()*window.innerWidth;
+				var c = Math.random()*window.innerHeight;
+				a.style.left = b + "px";
+				a.style.top = c + "px";
+				a.onclick = function(){
+					a.parentNode.removeChild(a);
+					makeFire();}
+				document.body.appendChild(a);
+			}
+
+	</script>
+</body>
+</html>
